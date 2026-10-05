@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Profile</title> <link rel="stylesheet" href="/stylesheets/profile.css"> 
+    <link rel="stylesheet" href="/stylesheets/common.css">
+</head> 
+<body> 
+    <a href="/logout">LOGOUT</a> 
+
+
+    <h5>edit your recent post</h5> 
+
+    <form action="/update/<%= post._id %>" method="POST"> 
+        <textarea name="content" placeholder="What's new on your mind?"><%= post.content %></textarea> <br> 
+        <input type="submit" value="UPDATE POST"> 
+    </form> 
+    
+</body> 
+</html>

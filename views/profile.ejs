@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="/stylesheets/common.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         PROFILE SECTION
+    ========================== -->
+
+    <div class="profile">
+
+        <!-- Profile Picture -->
+
+        <a href="/upload">
+            <% if (user.profilepic) { %>
+
+                <img
+                    class="profile-pic"
+                    src="/images/uploads/<%= user.profilepic %>"
+                    alt="Profile Picture"
+                >
+
+            <% } else { %>
+
+                <img
+                    class="profile-pic"
+                    src="/images/default.png"
+                    alt="Profile Picture"
+                >
+
+            <% } %>
+        </a>
+
+
+        <!-- Username -->
+
+        <h2>
+            <%= user.username %>
+        </h2>
+
+
+        <!-- User Name -->
+
+        <p>
+            <%= user.name %>
+        </p>
+
+
+        <!-- Edit Profile -->
+
+        <!-- <a href="/edit">
+            Edit Profile
+        </a> -->
+
+    </div>
+
+
+    <!-- =========================
+         CREATE POST
+    ========================== -->
+
+    <div class="create-post">
+
+        <h3>Create Post</h3>
+
+        <form
+            action="/post"
+            method="post"
+            enctype="multipart/form-data"
+        >
+
+            <!-- Post Content -->
+
+            <textarea
+                name="content"
+                placeholder="What's on your mind?"
+                required
+            ></textarea>
+
+
+            <!-- Upload Post Image -->
+
+            <input
+                type="file"
+                name="image"
+                accept="image/*"
+            >
+
+
+            <!-- Create Post -->
+
+            <input
+                type="submit"
+                value="Post"
+            >
+
+        </form>
+
+    </div>
+
+
+    <!-- =========================
+         POSTS SECTION
+    ========================== -->
+
+    <div class="posts">
+
+        <h3>Your Posts</h3>
+
+
+        <% user.posts.forEach(function(post) { %>
+
+            <div class="post">
+
+
+                <!-- =====================
+                     DATE AND TIME
+                ====================== -->
+
+                <div class="post-date">
+
+                    <%= post.date.toLocaleString() %>
+
+                </div>
+
+
+                <!-- =====================
+                     POST CONTENT
+                ====================== -->
+
+                <p class="post-content">
+
+                    <%= post.content %>
+
+                </p>
+
+
+                <!-- =====================
+                     POST IMAGE
+                ====================== -->
+
+                <% if (post.image) { %>
+
+                    <img
+                        class="post-image"
+                        src="/images/uploads/<%= post.image %>"
+                        alt="Post Image"
+                    >
+
+                <% } %>
+
+
+                <!-- =====================
+                     POST ACTIONS
+                ====================== -->
+
+                <div class="post-actions">
+
+
+                    <!-- LIKE -->
+
+                    <a href="/like/<%= post._id %>">
+
+                        ❤️
+
+                        <%= post.likes.length %>
+
+                        Likes
+
+                    </a>
+
+
+                    <!-- EDIT -->
+
+                    <a href="/edit/<%= post._id %>">
+
+                        Edit
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</body>
+</html>
